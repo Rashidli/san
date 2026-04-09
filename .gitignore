@@ -21,3 +21,6 @@ yarn-error.log
 # Project documentation (internal)
 san_brief.docx
 PROJECT_DOCUMENTATION.md
+
+# Claude Code
+/.claude
