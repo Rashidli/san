@@ -1,0 +1,398 @@
+/* ========================================
+   RESPONSIVE STYLES
+======================================== */
+
+/* Large Tablets and Small Desktops */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 960px;
+    }
+
+    .hero-content h1 {
+        font-size: 40px;
+    }
+
+    .section-header h2 {
+        font-size: 32px;
+    }
+
+    .why-us-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .footer-about {
+        grid-column: span 3;
+    }
+}
+
+/* Tablets */
+@media (max-width: 992px) {
+    .container {
+        max-width: 720px;
+    }
+
+    .header-top {
+        display: none;
+    }
+
+    .main-nav {
+        display: none;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    .header-actions .btn {
+        display: none;
+    }
+
+    .hero-slide {
+        height: 500px;
+    }
+
+    .hero-content h1 {
+        font-size: 36px;
+    }
+
+    .hero-content p {
+        font-size: 16px;
+    }
+
+    .section {
+        padding: 60px 0;
+    }
+
+    .section-header h2 {
+        font-size: 28px;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .about-image-badge {
+        bottom: -20px;
+        right: 20px;
+        padding: 15px 20px;
+    }
+
+    .about-image-badge h3 {
+        font-size: 28px;
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .blog-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-about {
+        grid-column: span 2;
+    }
+
+    .cta-section h2 {
+        font-size: 28px;
+    }
+
+    .page-header h1 {
+        font-size: 32px;
+    }
+}
+
+/* Mobile Landscape */
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+        padding: 0 15px;
+    }
+
+    .hero-slide {
+        height: 450px;
+    }
+
+    .hero-content h1 {
+        font-size: 28px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+    }
+
+    .section {
+        padding: 50px 0;
+    }
+
+    .section-header {
+        margin-bottom: 30px;
+    }
+
+    .section-header h2 {
+        font-size: 24px;
+    }
+
+    .section-header p {
+        font-size: 16px;
+    }
+
+    .about-content h2 {
+        font-size: 28px;
+    }
+
+    .about-features {
+        grid-template-columns: 1fr;
+    }
+
+    .why-us-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .why-us-card {
+        padding: 30px 20px;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio-card {
+        height: 250px;
+    }
+
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-section {
+        padding: 50px 0;
+    }
+
+    .cta-section h2 {
+        font-size: 24px;
+    }
+
+    .cta-section p {
+        font-size: 16px;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+    }
+
+    .contact-form-wrapper {
+        padding: 25px;
+    }
+
+    .contact-form-wrapper h3 {
+        font-size: 20px;
+    }
+
+    .footer-main {
+        padding: 40px 0;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .footer-about {
+        grid-column: span 1;
+    }
+
+    .footer-bottom-inner {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .page-header {
+        padding: 60px 0;
+    }
+
+    .page-header h1 {
+        font-size: 28px;
+    }
+
+    .faq-question {
+        padding: 15px 20px;
+        font-size: 14px;
+    }
+}
+
+/* Mobile Portrait */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+
+    .header-main {
+        padding: 10px 0;
+    }
+
+    .logo img {
+        max-height: 40px;
+    }
+
+    .mobile-menu {
+        width: 100%;
+    }
+
+    .hero-slide {
+        height: 400px;
+    }
+
+    .hero-content h1 {
+        font-size: 24px;
+    }
+
+    .hero-content p {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+
+    .section {
+        padding: 40px 0;
+    }
+
+    .section-header h2 {
+        font-size: 22px;
+    }
+
+    .about-content h2 {
+        font-size: 24px;
+    }
+
+    .about-image-badge {
+        position: static;
+        margin-top: 20px;
+        display: inline-block;
+    }
+
+    .why-us-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+    }
+
+    .why-us-card h3 {
+        font-size: 18px;
+    }
+
+    .service-image {
+        height: 180px;
+    }
+
+    .service-content {
+        padding: 25px 20px 20px;
+    }
+
+    .service-content h3 {
+        font-size: 18px;
+    }
+
+    .portfolio-card {
+        height: 200px;
+    }
+
+    .review-card {
+        padding: 20px;
+    }
+
+    .review-avatar {
+        width: 50px;
+        height: 50px;
+    }
+
+    .review-info h4 {
+        font-size: 16px;
+    }
+
+    .blog-image {
+        height: 180px;
+    }
+
+    .blog-content {
+        padding: 20px;
+    }
+
+    .blog-content h3 {
+        font-size: 16px;
+    }
+
+    .contact-item-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .contact-info h2 {
+        font-size: 24px;
+    }
+
+    .footer-col h4 {
+        font-size: 16px;
+    }
+
+    .page-header {
+        padding: 40px 0;
+    }
+
+    .page-header h1 {
+        font-size: 24px;
+    }
+
+    .breadcrumb {
+        font-size: 12px;
+    }
+
+    .success-icon {
+        width: 80px;
+        height: 80px;
+        font-size: 36px;
+    }
+
+    .success-content h1 {
+        font-size: 24px;
+    }
+
+    .pagination a,
+    .pagination span {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+}
