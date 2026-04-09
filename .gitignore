@@ -17,3 +17,7 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+# Project documentation (internal)
+san_brief.docx
+PROJECT_DOCUMENTATION.md
