@@ -7,7 +7,7 @@
     <title>{{ config('app.name') }} - Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Admin Panel" name="description"/>
-    <meta content="166Tech" name="author"/>
+    <meta content="Santexnik" name="author"/>
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
 

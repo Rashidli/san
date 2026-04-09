@@ -4,10 +4,10 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>166 Bağban - Giriş</title>
+    <title>{{ config('app.name') }} - Giriş</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="166 Bağban Admin Panel" name="description" />
-    <meta content="166Tech" name="author" />
+    <meta content="{{ config('app.name') }} Admin Panel" name="description" />
+    <meta content="{{ config('app.name') }}" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('/')}}assets/images/favicon.ico">
 

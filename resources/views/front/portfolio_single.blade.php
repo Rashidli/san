@@ -23,39 +23,74 @@
     <!-- Portfolio Detail -->
     <section class="section">
         <div class="container">
-            <div class="about-grid">
-                <div class="about-image">
+            <div class="portfolio-single">
+                <!-- Main Image Gallery -->
+                <div class="portfolio-gallery">
                     @if($portfolio->image)
-                    <img src="{{ asset('storage/' . $portfolio->image) }}" alt="{{ $portfolio->title }}">
+                    <div class="portfolio-main-image">
+                        <img src="{{ asset('storage/' . $portfolio->image) }}" alt="{{ $portfolio->title }}">
+                    </div>
                     @endif
 
                     @if($portfolio->images && $portfolio->images->count() > 0)
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px;">
+                    <div class="portfolio-thumbnails">
                         @foreach($portfolio->images as $image)
-                        <img src="{{ asset('storage/' . $image->image) }}" alt="{{ $portfolio->title }}" style="border-radius: var(--radius); cursor: pointer;">
+                        <div class="portfolio-thumb">
+                            <img src="{{ asset('storage/' . $image->image) }}" alt="{{ $portfolio->title }}">
+                        </div>
                         @endforeach
                     </div>
                     @endif
                 </div>
-                <div class="about-content">
-                    <h2>{{ $portfolio->title }}</h2>
 
-                    @if($portfolio->service)
-                    <div style="margin-bottom: 15px;">
-                        <span style="display: inline-block; padding: 6px 12px; background: var(--primary-color); color: #fff; border-radius: 20px; font-size: 13px;">
-                            {{ $portfolio->service->title }}
+                <!-- Portfolio Info -->
+                <div class="portfolio-info-box">
+                    <div class="portfolio-info-header">
+                        @if($portfolio->service)
+                        <span class="portfolio-category">
+                            <i class="fas fa-folder"></i> {{ $portfolio->service->title }}
                         </span>
-                    </div>
-                    @endif
-
-                    <div class="portfolio-description" style="color: var(--text-light); line-height: 1.8;">
-                        {!! $portfolio->description !!}
+                        @endif
+                        <h2>{{ $portfolio->title }}</h2>
                     </div>
 
-                    <div style="margin-top: 30px;">
+                    <div class="portfolio-details">
+                        @if($portfolio->service)
+                        <div class="portfolio-detail-item">
+                            <span class="detail-label">{{ word('service', 'Xidmət') }}</span>
+                            <span class="detail-value">{{ $portfolio->service->title }}</span>
+                        </div>
+                        @endif
+                        <div class="portfolio-detail-item">
+                            <span class="detail-label">{{ word('client', 'Müştəri') }}</span>
+                            <span class="detail-value">{{ $portfolio->client ?? word('private_client', 'Şəxsi müştəri') }}</span>
+                        </div>
+                        <div class="portfolio-detail-item">
+                            <span class="detail-label">{{ word('date', 'Tarix') }}</span>
+                            <span class="detail-value">{{ $portfolio->created_at->format('d.m.Y') }}</span>
+                        </div>
+                        <div class="portfolio-detail-item">
+                            <span class="detail-label">{{ word('location', 'Ünvan') }}</span>
+                            <span class="detail-value">{{ $portfolio->location ?? word('baku', 'Bakı, Azərbaycan') }}</span>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-description">
+                        <h3>{{ word('project_details', 'Layihə haqqında') }}</h3>
+                        <div class="single-text">
+                            {!! $portfolio->description !!}
+                        </div>
+                    </div>
+
+                    <div class="portfolio-actions">
                         <a href="{{ route('dynamic.page', $contact->slug ?? 'elaqe') }}" class="btn btn-primary">
                             <i class="fas fa-phone"></i> {{ word('order_service', 'Xidmət sifariş et') }}
                         </a>
+                        @if($portfolio->service)
+                        <a href="{{ route('dynamic.page', $portfolio->service->slug) }}" class="btn btn-outline">
+                            <i class="fas fa-wrench"></i> {{ word('view_service', 'Xidmətə bax') }}
+                        </a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -64,7 +99,7 @@
 
     <!-- Related Portfolio -->
     @php
-        $relatedPortfolios = \App\Models\Portfolio::active()->where('id', '!=', $portfolio->id)->ordered()->take(3)->get();
+        $relatedPortfolios = \App\Models\Portfolio::active()->where('id', '!=', $portfolio->id)->ordered()->take(4)->get();
     @endphp
     @if($relatedPortfolios->count() > 0)
     <section class="section section-light">
@@ -72,17 +107,19 @@
             <div class="section-header">
                 <h2>{{ word('other_works', 'Digər işlərimiz') }}</h2>
             </div>
-            <div class="portfolio-grid">
+            <div class="portfolio-grid portfolio-grid-4">
                 @foreach($relatedPortfolios as $relatedPortfolio)
                 <a href="{{ route('dynamic.page', $relatedPortfolio->slug) }}" class="portfolio-card">
                     @if($relatedPortfolio->image)
                     <img src="{{ asset('storage/' . $relatedPortfolio->image) }}" alt="{{ $relatedPortfolio->title }}">
                     @endif
                     <div class="portfolio-overlay">
-                        <h3>{{ $relatedPortfolio->title }}</h3>
-                        @if($relatedPortfolio->service)
-                        <span>{{ $relatedPortfolio->service->title }}</span>
-                        @endif
+                        <div class="portfolio-overlay-content">
+                            <h3>{{ $relatedPortfolio->title }}</h3>
+                            @if($relatedPortfolio->service)
+                            <span>{{ $relatedPortfolio->service->title }}</span>
+                            @endif
+                        </div>
                     </div>
                 </a>
                 @endforeach
@@ -90,5 +127,28 @@
         </div>
     </section>
     @endif
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>{{ word('start_project', 'Sizin layihənizi də həyata keçirək') }}</h2>
+            <p>{{ word('cta_portfolio', 'Peşəkar komandamız sizin istəklərinizi ən yüksək səviyyədə yerinə yetirəcək') }}</p>
+            <div class="cta-buttons">
+                @php
+                    $phoneItem = $footer_contact_items->first(function($item) {
+                        return str_contains($item->link ?? '', 'tel:');
+                    });
+                @endphp
+                @if($phoneItem)
+                <a href="{{ $phoneItem->link }}" class="btn btn-white">
+                    <i class="fas fa-phone"></i> {{ word('call_now', 'İndi zəng edin') }}
+                </a>
+                @endif
+                <a href="{{ route('dynamic.page', $contact->slug ?? 'elaqe') }}" class="btn btn-outline-white">
+                    <i class="fas fa-envelope"></i> {{ word('contact_us', 'Əlaqə') }}
+                </a>
+            </div>
+        </div>
+    </section>
 
 @endsection
