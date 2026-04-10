@@ -11,7 +11,7 @@
         <div class="container">
             <h1>{{ $single->title ?? word('services', 'Xidmətlər') }}</h1>
             <div class="breadcrumb">
-                <a href="{{ route('welcome') }}">{{ word('home', 'Ana səhifə') }}</a>
+                <a href="{{ route('welcome') }}">{{ $home_page->title ?? word('home', 'Ana səhifə') }}</a>
                 <span>/</span>
                 <span>{{ $single->title ?? word('services', 'Xidmətlər') }}</span>
             </div>

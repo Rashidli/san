@@ -60,18 +60,18 @@
                     </ul>
                 </div>
 
-                <!-- Our Services -->
+                <!-- Latest Blogs -->
                 <div class="footer-col">
-                    <h4>{{ word('our_services', 'Xidmətlərimiz') }}</h4>
+                    <h4>{{ word('latest_news', 'Son xəbərlər') }}</h4>
                     <ul>
                         @php
-                            $footerServices = \App\Models\Service::active()->ordered()->take(5)->get();
+                            $footerBlogs = \App\Models\Blog::active()->latest()->take(4)->get();
                         @endphp
-                        @foreach($footerServices as $fService)
+                        @foreach($footerBlogs as $fBlog)
                             <li>
-                                <a href="{{ route('dynamic.page', $fService->slug) }}">
+                                <a href="{{ route('dynamic.page', $fBlog->slug) }}">
                                     <i class="fas fa-chevron-right"></i>
-                                    {{ $fService->title }}
+                                    {{ Str::limit($fBlog->title, 30) }}
                                 </a>
                             </li>
                         @endforeach
@@ -103,22 +103,18 @@
         <div class="container">
             <div class="footer-bottom-inner">
                 <p>&copy; {{ date('Y') }} {{ config('app.name') }}. {{ word('all_rights_reserved', 'Bütün hüquqlar qorunur.') }}</p>
-                <p>{{ word('developed_by', 'Hazırladı') }}: <a href="#">Santexnik Team</a></p>
+                <p>{{ word('developed_by', 'Hazırladı') }}: <a href="{{ $developer_link }}">{{ $developer_name }}</a></p>
             </div>
         </div>
     </div>
 </footer>
 
 <!-- WhatsApp Float Button -->
-@php
-    $whatsappItem = $footer_contact_items->first(function($item) {
-        return str_contains($item->link ?? '', 'wa.me') || str_contains($item->link ?? '', 'whatsapp');
-    });
-    $whatsappLink = $whatsappItem ? $whatsappItem->link : '#';
-@endphp
-<a href="{{ $whatsappLink }}" class="whatsapp-float" target="_blank" title="WhatsApp">
+@if($global_whatsapp)
+<a href="{{ $global_whatsapp }}" class="whatsapp-float" target="_blank" title="WhatsApp">
     <i class="fab fa-whatsapp"></i>
 </a>
+@endif
 
 <!-- Scroll to Top -->
 <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
@@ -127,5 +123,7 @@
 
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<!-- GLightbox JS -->
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
 <!-- Main JS -->
 <script src="{{ asset('front/js/main.js') }}?v={{ filemtime(public_path('front/js/main.js')) ?? time() }}"></script>

@@ -60,14 +60,9 @@ class ServiceController extends Controller
                 $filename = $this->imageUploadService->upload($request->file('image'));
             }
 
-            $iconPath = null;
-            if ($request->hasFile('icon')) {
-                $iconPath = $request->file('icon')->store('services/icons', 'public');
-            }
-
             Service::create([
                 'image' => $filename,
-                'icon' => $iconPath,
+                'icon' => $request->icon,
                 'az' => [
                     'title' => $request->az_title,
                     'description' => $request->az_description,
@@ -136,15 +131,9 @@ class ServiceController extends Controller
                 $service->image = $this->imageUploadService->upload($request->file('image'));
             }
 
-            if ($request->hasFile('icon')) {
-                if ($service->icon) {
-                    \Storage::disk('public')->delete($service->icon);
-                }
-                $service->icon = $request->file('icon')->store('services/icons', 'public');
-            }
-
             $service->update([
                 'is_active' => $request->boolean('is_active'),
+                'icon' => $request->icon,
                 'az' => [
                     'title' => $request->az_title,
                     'description' => $request->az_description,

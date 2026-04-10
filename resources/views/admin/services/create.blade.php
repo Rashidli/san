@@ -122,9 +122,29 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label fw-bold">Icon (SVG)</label>
-                                    <input class="form-control" type="file" name="icon" accept=".svg,image/svg+xml">
-                                    <small class="text-muted">Ana səhifədə göstəriləcək icon (SVG)</small>
+                                    <label class="form-label fw-bold">Icon (FontAwesome)</label>
+                                    <select class="form-select icon-select" name="icon" id="iconSelect">
+                                        <option value="">-- Icon seçin --</option>
+                                        <option value="fa-solid fa-wrench">🔧 Açar (Wrench)</option>
+                                        <option value="fa-solid fa-droplet">💧 Damcı (Droplet)</option>
+                                        <option value="fa-solid fa-faucet-drip">🚰 Kran (Faucet)</option>
+                                        <option value="fa-solid fa-shower">🚿 Duş (Shower)</option>
+                                        <option value="fa-solid fa-bath">🛁 Vanna (Bath)</option>
+                                        <option value="fa-solid fa-toilet">🚽 Tualet (Toilet)</option>
+                                        <option value="fa-solid fa-sink">🪥 Leysan (Sink)</option>
+                                        <option value="fa-solid fa-hot-tub-person">♨️ Jakuzi (Hot Tub)</option>
+                                        <option value="fa-solid fa-temperature-high">🌡️ İstilik (Temperature)</option>
+                                        <option value="fa-solid fa-fire">🔥 Alov (Fire)</option>
+                                        <option value="fa-solid fa-house-chimney">🏠 Ev (House)</option>
+                                        <option value="fa-solid fa-water">🌊 Su (Water)</option>
+                                        <option value="fa-solid fa-pump-soap">🧴 Sabun (Pump)</option>
+                                        <option value="fa-solid fa-toolbox">🧰 Alət qutusu (Toolbox)</option>
+                                        <option value="fa-solid fa-screwdriver-wrench">🔧 Alətlər (Tools)</option>
+                                        <option value="fa-solid fa-gear">⚙️ Dişli (Gear)</option>
+                                        <option value="fa-solid fa-plug">🔌 Fiş (Plug)</option>
+                                        <option value="fa-solid fa-bolt">⚡ İldırım (Bolt)</option>
+                                    </select>
+                                    <small class="text-muted">Xidmət kartında göstəriləcək icon</small>
                                     @error('icon')
                                         <small class="text-danger d-block">{{ $message }}</small>
                                     @enderror

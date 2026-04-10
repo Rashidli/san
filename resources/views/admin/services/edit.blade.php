@@ -134,14 +134,34 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label fw-bold">Icon (SVG)</label>
+                                    <label class="form-label fw-bold">Icon (FontAwesome)</label>
                                     @if($service->icon)
-                                        <div class="text-center p-2 bg-light rounded mb-2">
-                                            <img src="{{ asset('storage/' . $service->icon) }}" style="max-height: 50px;" alt="Icon">
+                                        <div class="text-center p-3 bg-light rounded mb-2">
+                                            <i class="{{ $service->icon }}" style="font-size: 40px; color: var(--bs-primary);"></i>
                                         </div>
                                     @endif
-                                    <input class="form-control" type="file" name="icon" accept=".svg,image/svg+xml">
-                                    <small class="text-muted">Ana səhifədə göstəriləcək icon (SVG)</small>
+                                    <select class="form-select icon-select" name="icon" id="iconSelect">
+                                        <option value="">-- Icon seçin --</option>
+                                        <option value="fa-solid fa-wrench" {{ $service->icon == 'fa-solid fa-wrench' ? 'selected' : '' }}>🔧 Açar (Wrench)</option>
+                                        <option value="fa-solid fa-droplet" {{ $service->icon == 'fa-solid fa-droplet' ? 'selected' : '' }}>💧 Damcı (Droplet)</option>
+                                        <option value="fa-solid fa-faucet-drip" {{ $service->icon == 'fa-solid fa-faucet-drip' ? 'selected' : '' }}>🚰 Kran (Faucet)</option>
+                                        <option value="fa-solid fa-shower" {{ $service->icon == 'fa-solid fa-shower' ? 'selected' : '' }}>🚿 Duş (Shower)</option>
+                                        <option value="fa-solid fa-bath" {{ $service->icon == 'fa-solid fa-bath' ? 'selected' : '' }}>🛁 Vanna (Bath)</option>
+                                        <option value="fa-solid fa-toilet" {{ $service->icon == 'fa-solid fa-toilet' ? 'selected' : '' }}>🚽 Tualet (Toilet)</option>
+                                        <option value="fa-solid fa-sink" {{ $service->icon == 'fa-solid fa-sink' ? 'selected' : '' }}>🪥 Leysan (Sink)</option>
+                                        <option value="fa-solid fa-hot-tub-person" {{ $service->icon == 'fa-solid fa-hot-tub-person' ? 'selected' : '' }}>♨️ Jakuzi (Hot Tub)</option>
+                                        <option value="fa-solid fa-temperature-high" {{ $service->icon == 'fa-solid fa-temperature-high' ? 'selected' : '' }}>🌡️ İstilik (Temperature)</option>
+                                        <option value="fa-solid fa-fire" {{ $service->icon == 'fa-solid fa-fire' ? 'selected' : '' }}>🔥 Alov (Fire)</option>
+                                        <option value="fa-solid fa-house-chimney" {{ $service->icon == 'fa-solid fa-house-chimney' ? 'selected' : '' }}>🏠 Ev (House)</option>
+                                        <option value="fa-solid fa-water" {{ $service->icon == 'fa-solid fa-water' ? 'selected' : '' }}>🌊 Su (Water)</option>
+                                        <option value="fa-solid fa-pump-soap" {{ $service->icon == 'fa-solid fa-pump-soap' ? 'selected' : '' }}>🧴 Sabun (Pump)</option>
+                                        <option value="fa-solid fa-toolbox" {{ $service->icon == 'fa-solid fa-toolbox' ? 'selected' : '' }}>🧰 Alət qutusu (Toolbox)</option>
+                                        <option value="fa-solid fa-screwdriver-wrench" {{ $service->icon == 'fa-solid fa-screwdriver-wrench' ? 'selected' : '' }}>🔧 Alətlər (Tools)</option>
+                                        <option value="fa-solid fa-gear" {{ $service->icon == 'fa-solid fa-gear' ? 'selected' : '' }}>⚙️ Dişli (Gear)</option>
+                                        <option value="fa-solid fa-plug" {{ $service->icon == 'fa-solid fa-plug' ? 'selected' : '' }}>🔌 Fiş (Plug)</option>
+                                        <option value="fa-solid fa-bolt" {{ $service->icon == 'fa-solid fa-bolt' ? 'selected' : '' }}>⚡ İldırım (Bolt)</option>
+                                    </select>
+                                    <small class="text-muted">Xidmət kartında göstəriləcək icon</small>
                                     @error('icon')
                                         <small class="text-danger d-block">{{ $message }}</small>
                                     @enderror

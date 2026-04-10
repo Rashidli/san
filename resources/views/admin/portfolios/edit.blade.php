@@ -136,6 +136,16 @@
                                 </div>
 
                                 <div class="mb-3">
+                                    <label class="form-label fw-bold">Müştəri</label>
+                                    <input class="form-control" type="text" name="client" value="{{ old('client', $portfolio->client) }}" placeholder="Müştəri adı...">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Ünvan</label>
+                                    <input class="form-control" type="text" name="location" value="{{ old('location', $portfolio->location) }}" placeholder="Bakı, Azərbaycan">
+                                </div>
+
+                                <div class="mb-3">
                                     <label class="form-label fw-bold">Əlavə Şəkillər</label>
                                     <input class="form-control" type="file" name="images[]" accept="image/*" multiple>
                                     <small class="text-muted">Birdən çox şəkil seçə bilərsiniz</small>

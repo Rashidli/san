@@ -11,9 +11,9 @@
         <div class="container">
             <h1>{{ $portfolio->title }}</h1>
             <div class="breadcrumb">
-                <a href="{{ route('welcome') }}">{{ word('home', 'Ana səhifə') }}</a>
+                <a href="{{ route('welcome') }}">{{ $home_page->title ?? word('home', 'Ana səhifə') }}</a>
                 <span>/</span>
-                <a href="{{ route('dynamic.page', $portfolio_page->slug ?? 'portfolio') }}">{{ word('portfolio', 'Portfolio') }}</a>
+                <a href="{{ route('dynamic.page', $portfolio_page->slug ?? 'portfolio') }}">{{ $portfolio_page->title ?? word('portfolio', 'Portfolio') }}</a>
                 <span>/</span>
                 <span>{{ Str::limit($portfolio->title, 30) }}</span>
             </div>
@@ -27,17 +27,23 @@
                 <!-- Main Image Gallery -->
                 <div class="portfolio-gallery">
                     @if($portfolio->image)
-                    <div class="portfolio-main-image">
+                    <a href="{{ asset('storage/' . $portfolio->image) }}" class="portfolio-main-image glightbox" data-gallery="portfolio-gallery" data-title="{{ $portfolio->title }}">
                         <img src="{{ asset('storage/' . $portfolio->image) }}" alt="{{ $portfolio->title }}">
-                    </div>
+                        <div class="gallery-zoom">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </a>
                     @endif
 
                     @if($portfolio->images && $portfolio->images->count() > 0)
                     <div class="portfolio-thumbnails">
                         @foreach($portfolio->images as $image)
-                        <div class="portfolio-thumb">
+                        <a href="{{ asset('storage/' . $image->image) }}" class="portfolio-thumb glightbox" data-gallery="portfolio-gallery" data-title="{{ $portfolio->title }}">
                             <img src="{{ asset('storage/' . $image->image) }}" alt="{{ $portfolio->title }}">
-                        </div>
+                            <div class="gallery-zoom">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </a>
                         @endforeach
                     </div>
                     @endif

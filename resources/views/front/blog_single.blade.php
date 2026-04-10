@@ -11,9 +11,9 @@
         <div class="container">
             <h1>{{ $blog->title }}</h1>
             <div class="breadcrumb">
-                <a href="{{ route('welcome') }}">{{ word('home', 'Ana səhifə') }}</a>
+                <a href="{{ route('welcome') }}">{{ $home_page->title ?? word('home', 'Ana səhifə') }}</a>
                 <span>/</span>
-                <a href="{{ route('dynamic.page', $blog_page->slug ?? 'bloq') }}">{{ word('blog', 'Bloq') }}</a>
+                <a href="{{ route('dynamic.page', $blog_page->slug ?? 'bloq') }}">{{ $blog_page->title ?? word('blog', 'Bloq') }}</a>
                 <span>/</span>
                 <span>{{ Str::limit($blog->title, 30) }}</span>
             </div>
@@ -35,6 +35,14 @@
                             <i class="far fa-eye"></i>
                             {{ $blog->views ?? 0 }} {{ word('views', 'baxış') }}
                         </span>
+                        @if($blog->service)
+                        <span class="meta-item">
+                            <a href="{{ route('dynamic.page', $blog->service->slug) }}">
+                                <i class="fas fa-tools"></i>
+                                {{ $blog->service->title }}
+                            </a>
+                        </span>
+                        @endif
                         @if($blog->tags->count() > 0)
                         <span class="meta-item">
                             <i class="far fa-folder"></i>

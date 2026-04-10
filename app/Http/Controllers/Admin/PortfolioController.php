@@ -58,6 +58,8 @@ class PortfolioController extends Controller
             $portfolio = Portfolio::create([
                 'image' => $filename,
                 'service_id' => $request->service_id,
+                'client' => $request->client,
+                'location' => $request->location,
                 'is_active' => $request->boolean('is_active', true),
                 'is_featured' => $request->boolean('is_featured'),
                 'order' => $request->order ?? 0,
@@ -136,6 +138,8 @@ class PortfolioController extends Controller
 
             $portfolio->update([
                 'service_id' => $request->service_id,
+                'client' => $request->client,
+                'location' => $request->location,
                 'is_active' => $request->boolean('is_active'),
                 'is_featured' => $request->boolean('is_featured'),
                 'order' => $request->order ?? 0,

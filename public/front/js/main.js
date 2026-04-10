@@ -21,6 +21,7 @@
         initFormValidation();
         initNavDropdown();
         initParallaxEffect();
+        initLightbox();
     });
 
     /**
@@ -521,6 +522,23 @@
             }
 
             return isValid;
+        }
+    }
+
+    /**
+     * GLightbox - Image Gallery
+     */
+    function initLightbox() {
+        if (typeof GLightbox !== 'undefined') {
+            GLightbox({
+                selector: '.glightbox',
+                touchNavigation: true,
+                loop: true,
+                autoplayVideos: true,
+                openEffect: 'zoom',
+                closeEffect: 'fade',
+                cssEf498: 'fade'
+            });
         }
     }
 

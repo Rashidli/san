@@ -16,7 +16,7 @@ class Portfolio extends Model
         'img_alt', 'img_title', 'meta_title', 'meta_description'
     ];
 
-    protected $fillable = ['service_id', 'image', 'is_active', 'is_featured', 'order'];
+    protected $fillable = ['service_id', 'client', 'location', 'image', 'is_active', 'is_featured', 'order'];
 
     protected $casts = [
         'is_active' => 'boolean',

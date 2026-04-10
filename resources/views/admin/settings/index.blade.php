@@ -1,44 +1,117 @@
 @include('admin.includes.header')
-
 <div class="main-content">
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            @if(session('message'))
-                                <div class="alert alert-success">{{session('message')}}</div>
-                            @endif
-                            <h4 class="card-title">Ayarlar</h4>
-                            <br>
-
-                            <form action="{{ route('settings.update') }}" method="post">
-                                @csrf
-                                @method('PUT')
-
-                                <div class="mb-3">
-                                    <label class="col-form-label">Xəritə iframe URL</label>
-                                    <input class="form-control" type="text" name="map_iframe" value="{{ $settings['map_iframe'] }}" placeholder="Google Maps embed URL">
-                                    <small class="text-muted">Google Maps-dan "Embed a map" linkini buraya yapışdırın</small>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="col-form-label">WhatsApp nömrəsi</label>
-                                    <input class="form-control" type="text" name="whatsapp_number" value="{{ $settings['whatsapp_number'] }}" placeholder="994505555555">
-                                    <small class="text-muted">Nömrəni beynəlxalq formatda yazın (məs: 994505555555)</small>
-                                </div>
-
-                                <div class="mb-3">
-                                    <button class="btn btn-primary">Yadda saxla</button>
-                                </div>
-                            </form>
-                        </div>
+                <div class="col-12">
+                    <div class="page-title-box d-flex align-items-center justify-content-between">
+                        <h4 class="mb-0">Ayarlar</h4>
                     </div>
                 </div>
             </div>
+
+            @if(session('message'))
+                <div class="alert alert-success">{{session('message')}}</div>
+            @endif
+
+            <form action="{{ route('settings.update') }}" method="post">
+                @csrf
+                @method('PUT')
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="card-title mb-0 text-white">
+                                    <i class="fab fa-whatsapp me-2"></i> WhatsApp Ayarlari
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">WhatsApp Linki</label>
+                                    <input class="form-control" type="text" name="whatsapp" value="{{ $settings['whatsapp'] }}" placeholder="https://wa.me/994501234567">
+                                    <small class="text-muted">Numune: https://wa.me/994501234567 (olke kodu ile, + isaresi olmadan)</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header bg-secondary text-white">
+                                <h5 class="card-title mb-0 text-white">
+                                    <i class="fas fa-map-marker-alt me-2"></i> Xerite Ayarlari
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Google Map Embed Kodu</label>
+                                    <textarea class="form-control" name="map_embed" rows="6" placeholder="<iframe src='...'></iframe>">{{ $settings['map_embed'] }}</textarea>
+                                    <small class="text-muted">Google Maps-dan "Embed a map" secib iframe kodunu bura yapishdirin</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header bg-info text-white">
+                                <h5 class="card-title mb-0 text-white">
+                                    <i class="fas fa-chart-bar me-2"></i> Statistika
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6 mb-3">
+                                        <label class="form-label fw-bold">Illik Tecrube</label>
+                                        <input class="form-control" type="text" name="stat_years" value="{{ $settings['stat_years'] }}" placeholder="10+">
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <label class="form-label fw-bold">Mushteri Sayi</label>
+                                        <input class="form-control" type="text" name="stat_customers" value="{{ $settings['stat_customers'] }}" placeholder="500+">
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <label class="form-label fw-bold">Xidmet Saati</label>
+                                        <input class="form-control" type="text" name="stat_service_hours" value="{{ $settings['stat_service_hours'] }}" placeholder="24/7">
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <label class="form-label fw-bold">Zemanet</label>
+                                        <input class="form-control" type="text" name="stat_warranty" value="{{ $settings['stat_warranty'] }}" placeholder="1 il">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header bg-dark text-white">
+                                <h5 class="card-title mb-0 text-white">
+                                    <i class="fas fa-code me-2"></i> Developer
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Developer Adi</label>
+                                    <input class="form-control" type="text" name="developer_name" value="{{ $settings['developer_name'] }}" placeholder="Developer adi">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Developer Linki</label>
+                                    <input class="form-control" type="text" name="developer_link" value="{{ $settings['developer_link'] }}" placeholder="https://example.com">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-save me-1"></i> Yadda Saxla
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-
 @include('admin.includes.footer')

@@ -97,6 +97,11 @@ class HomeController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:50',
+        ], [
+            'name.required' => 'Ad, Soyad sahəsi mütləqdir.',
+            'name.max' => 'Ad, Soyad 255 simvoldan çox ola bilməz.',
+            'phone.required' => 'Telefon sahəsi mütləqdir.',
+            'phone.max' => 'Telefon 50 simvoldan çox ola bilməz.',
         ]);
 
         Contact::create([

@@ -11,7 +11,7 @@
         <div class="container">
             <h1>{{ $single->title ?? word('about', 'Haqqımızda') }}</h1>
             <div class="breadcrumb">
-                <a href="{{ route('welcome') }}">{{ word('home', 'Ana səhifə') }}</a>
+                <a href="{{ route('welcome') }}">{{ $home_page->title ?? word('home', 'Ana səhifə') }}</a>
                 <span>/</span>
                 <span>{{ $single->title ?? word('about', 'Haqqımızda') }}</span>
             </div>
@@ -28,32 +28,73 @@
                     <img src="{{ asset('storage/' . $about->image) }}" alt="{{ $about->title }}">
                     @endif
                     <div class="about-image-badge">
-                        <h3>10+</h3>
+                        <h3>{{ $stat_years }}</h3>
                         <span>{{ word('years_experience', 'İllik təcrübə') }}</span>
                     </div>
                 </div>
                 <div class="about-content">
+                    <span class="about-subtitle"><i class="fas fa-wrench"></i> {{ word('about_us', 'Haqqımızda') }}</span>
                     <h2>{{ $about->title }}</h2>
                     <div class="about-text">
                         {!! $about->description !!}
                     </div>
                     <div class="about-features">
                         <div class="about-feature">
-                            <i class="fas fa-check"></i>
+                            <i class="fas fa-check-circle"></i>
                             <span>{{ word('quality_service', 'Keyfiyyətli xidmət') }}</span>
                         </div>
                         <div class="about-feature">
-                            <i class="fas fa-check"></i>
+                            <i class="fas fa-check-circle"></i>
                             <span>{{ word('professional_team', 'Peşəkar komanda') }}</span>
                         </div>
                         <div class="about-feature">
-                            <i class="fas fa-check"></i>
+                            <i class="fas fa-check-circle"></i>
                             <span>{{ word('fast_service', 'Sürətli xidmət') }}</span>
                         </div>
                         <div class="about-feature">
-                            <i class="fas fa-check"></i>
+                            <i class="fas fa-check-circle"></i>
                             <span>{{ word('warranty', 'Zəmanət') }}</span>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="about-stats">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number">{{ $stat_years }}</h3>
+                        <p>{{ word('years_experience', 'İllik təcrübə') }}</p>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number">{{ $stat_customers }}</h3>
+                        <p>{{ word('happy_customers', 'Razı müştəri') }}</p>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number">{{ $stat_service_hours }}</h3>
+                        <p>{{ word('service_available', 'Xidmət mövcuddur') }}</p>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number">{{ $stat_warranty }}</h3>
+                        <p>{{ word('warranty', 'Zəmanət') }}</p>
                     </div>
                 </div>
             </div>

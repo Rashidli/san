@@ -22,8 +22,16 @@ use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\WhyUsController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
+// Sitemap & Robots
+Route::get('sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+Route::get('robots.txt', function() {
+    $content = "User-agent: *\nAllow: /\n\nSitemap: " . url('sitemap.xml');
+    return response($content, 200)->header('Content-Type', 'text/plain');
+});
 
 // Utility routes
 Route::get('storage_link', function () {

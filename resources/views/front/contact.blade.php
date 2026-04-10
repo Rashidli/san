@@ -11,7 +11,7 @@
         <div class="container">
             <h1>{{ $single->title ?? word('contact', 'Əlaqə') }}</h1>
             <div class="breadcrumb">
-                <a href="{{ route('welcome') }}">{{ word('home', 'Ana səhifə') }}</a>
+                <a href="{{ route('welcome') }}">{{ $home_page->title ?? word('home', 'Ana səhifə') }}</a>
                 <span>/</span>
                 <span>{{ $single->title ?? word('contact', 'Əlaqə') }}</span>
             </div>
@@ -59,15 +59,32 @@
 
                 <div class="contact-form-wrapper">
                     <h3>{{ word('send_message', 'Mesaj göndərin') }}</h3>
-                    <form action="{{ route('contact_post') }}" method="POST" class="contact-form">
+
+                    @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+
+                    <form action="{{ route('contact_post') }}" method="POST" class="contact-form" id="contactForm">
                         @csrf
                         <div class="form-group">
                             <label for="name">{{ word('full_name', 'Ad, Soyad') }} *</label>
-                            <input type="text" id="name" name="name" class="form-control" required placeholder="{{ word('enter_name', 'Adınızı daxil edin') }}">
+                            <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="{{ word('enter_name', 'Adınızı daxil edin') }}">
+                            @error('name')
+                            <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="phone">{{ word('phone', 'Telefon') }} *</label>
-                            <input type="tel" id="phone" name="phone" class="form-control" required placeholder="{{ word('enter_phone', 'Telefon nömrənizi daxil edin') }}">
+                            <input type="tel" id="phone" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}" placeholder="{{ word('enter_phone', 'Telefon nömrənizi daxil edin') }}">
+                            @error('phone')
+                            <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
                         </div>
                         @if($services->count() > 0)
                         <div class="form-group">
@@ -75,14 +92,14 @@
                             <select id="service_id" name="service_id" class="form-control">
                                 <option value="">{{ word('select_service', 'Xidmət seçin') }}</option>
                                 @foreach($services as $service)
-                                <option value="{{ $service->id }}">{{ $service->title }}</option>
+                                <option value="{{ $service->id }}" {{ old('service_id') == $service->id ? 'selected' : '' }}>{{ $service->title }}</option>
                                 @endforeach
                             </select>
                         </div>
                         @endif
                         <div class="form-group">
                             <label for="message">{{ word('message', 'Mesaj') }}</label>
-                            <textarea id="message" name="message" class="form-control" rows="5" placeholder="{{ word('enter_message', 'Mesajınızı yazın') }}"></textarea>
+                            <textarea id="message" name="message" class="form-control" rows="5" placeholder="{{ word('enter_message', 'Mesajınızı yazın') }}">{{ old('message') }}</textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-paper-plane"></i> {{ word('send', 'Göndər') }}
@@ -92,5 +109,14 @@
             </div>
         </div>
     </section>
+
+    <!-- Map Section -->
+    @if($global_map)
+    <section class="map-section">
+        <div class="map-container">
+            {!! $global_map !!}
+        </div>
+    </section>
+    @endif
 
 @endsection

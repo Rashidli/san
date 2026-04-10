@@ -55,7 +55,14 @@ class AppServiceProvider extends ServiceProvider
                     'contact' => $singles->get('contact'),
                     'footer_socials' => Social::active()->get(),
                     'footer_contact_items' => ContactItem::active()->get(),
-                    'global_whatsapp' => Setting::get('whatsapp_number'),
+                    'global_whatsapp' => Setting::get('whatsapp'),
+                    'global_map' => Setting::get('map_embed'),
+                    'stat_years' => Setting::get('stat_years', '10+'),
+                    'stat_customers' => Setting::get('stat_customers', '500+'),
+                    'stat_service_hours' => Setting::get('stat_service_hours', '24/7'),
+                    'stat_warranty' => Setting::get('stat_warranty', '1 il'),
+                    'developer_name' => Setting::get('developer_name', 'Developer'),
+                    'developer_link' => Setting::get('developer_link', '#'),
                     'trans' => $trans,
                 ];
             });

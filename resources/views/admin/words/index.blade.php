@@ -10,34 +10,53 @@
                                 @if(session('message'))
                                     <div class="alert alert-success">{{session('message')}}</div>
                                 @endif
-                                <h4 class="card-title">Sözlər</h4>
-                                        <a href="{{route('words.create')}}" class="btn btn-primary">+</a>
-                                <br>
-                                <br>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h4 class="card-title mb-0">Sözlər</h4>
+                                    <a href="{{route('words.create')}}" class="btn btn-primary">+ Yeni söz</a>
+                                </div>
+
+                                <!-- Search Form -->
+                                <form action="{{ route('words.index') }}" method="GET" class="mb-4">
+                                    <div class="input-group" style="max-width: 400px;">
+                                        <input type="text" name="search" class="form-control" placeholder="Söz və ya tərcümə axtar..." value="{{ $search ?? '' }}">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-search"></i> Axtar
+                                        </button>
+                                        @if($search)
+                                        <a href="{{ route('words.index') }}" class="btn btn-secondary">
+                                            <i class="fas fa-times"></i>
+                                        </a>
+                                        @endif
+                                    </div>
+                                    @if($search)
+                                    <small class="text-muted mt-1 d-block">{{ $words->count() }} nəticə tapıldı "{{ $search }}" üçün</small>
+                                    @endif
+                                </form>
 
                                 <div class="table-responsive">
-                                    <table class="table table-centered mb-0 align-middle table-hover table-nowrap">
+                                    <table class="table table-centered mb-0 align-middle table-hover">
 
                                         <thead>
                                         <tr>
-                                            <th>№</th>
-                                            <th>Başlıq</th>
-                                            <th>Əməliyyat</th>
+                                            <th style="width: 50px;">№</th>
+                                            <th>AZ</th>
+                                            <th>EN</th>
+                                            <th>RU</th>
+                                            <th style="width: 100px;">Əməliyyat</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($words as $key => $word)
+                                        @foreach($words as $index => $word)
 
                                             <tr>
-                                                <th scope="row">{{$key}}</th>
-                                                <td title="{{$word->key}}">{{$word->title}}</td>
+                                                <td>{{ $index + 1 }}</td>
+                                                <td style="word-break: break-word;">{{ $word->translate('az')->title ?? '-' }}</td>
+                                                <td style="word-break: break-word;">{{ $word->translate('en')->title ?? '-' }}</td>
+                                                <td style="word-break: break-word;">{{ $word->translate('ru')->title ?? '-' }}</td>
                                                 <td>
-                                                    <a href="{{route('words.edit',$word->id)}}" class="btn btn-primary" style="margin-right: 15px" >Edit</a>
-{{--                                                    <form action="{{route('words.destroy', $word->id)}}" method="post" style="display: inline-block">--}}
-{{--                                                        {{ method_field('DELETE') }}--}}
-{{--                                                        @csrf--}}
-{{--                                                        <button onclick="return confirm('Məlumatın silinməyin təsdiqləyin')" type="submit" class="btn btn-danger">Delete</button>--}}
-{{--                                                    </form>--}}
+                                                    <a href="{{route('words.edit',$word->id)}}" class="btn btn-sm btn-primary">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
 

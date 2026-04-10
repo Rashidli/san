@@ -11,9 +11,9 @@
         <div class="container">
             <h1>{{ $service->title }}</h1>
             <div class="breadcrumb">
-                <a href="{{ route('welcome') }}">{{ word('home', 'Ana səhifə') }}</a>
+                <a href="{{ route('welcome') }}">{{ $home_page->title ?? word('home', 'Ana səhifə') }}</a>
                 <span>/</span>
-                <a href="{{ route('dynamic.page', $service_page->slug ?? 'xidmetler') }}">{{ word('services', 'Xidmətlər') }}</a>
+                <a href="{{ route('dynamic.page', $service_page->slug ?? 'xidmetler') }}">{{ $service_page->title ?? word('services', 'Xidmətlər') }}</a>
                 <span>/</span>
                 <span>{{ $service->title }}</span>
             </div>
@@ -36,6 +36,28 @@
                         @endif
                     </div>
                     @endif
+
+                    <!-- CTA Buttons -->
+                    @php
+                        $phoneItem = $footer_contact_items->first(function($item) {
+                            return str_contains($item->link ?? '', 'tel:');
+                        });
+                        $whatsappItem = $footer_contact_items->first(function($item) {
+                            return str_contains($item->link ?? '', 'wa.me') || str_contains($item->link ?? '', 'whatsapp');
+                        });
+                    @endphp
+                    <div class="service-cta-buttons">
+                        @if($phoneItem)
+                        <a href="{{ $phoneItem->link }}" class="btn btn-primary">
+                            <i class="fas fa-phone-alt"></i> {{ word('call_now', 'Zəng et') }}
+                        </a>
+                        @endif
+                        @if($global_whatsapp)
+                        <a href="{{ $global_whatsapp }}" class="btn btn-whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        @endif
+                    </div>
 
                     <!-- Content -->
                     <div class="single-content-box">

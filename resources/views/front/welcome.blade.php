@@ -4,10 +4,6 @@
 @section('description', $seo->seo_description ?? '')
 @section('keywords', $seo->seo_keywords ?? '')
 
-@section('az_slug', 'ana-sehife')
-@section('en_slug', 'en/home')
-@section('ru_slug', 'ru/glavnaya')
-
 @section('content')
 
     <!-- Hero Slider -->
@@ -51,7 +47,7 @@
                     <img src="{{ asset('storage/' . $about->image) }}" alt="{{ $about->title }}">
                     @endif
                     <div class="about-image-badge">
-                        <h3>10+</h3>
+                        <h3>{{ $stat_years }}</h3>
                         <span>{{ word('years_experience', 'İllik təcrübə') }}</span>
                     </div>
                 </div>
